@@ -218,8 +218,9 @@
                         <input type="text" id="name-input" required placeholder="Your Name" class="w-full bg-transparent border-b border-brand-border/30 py-3 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
                         
                         <div class="relative w-full group-focus-within:text-brand-text">
-                            <input type="email" id="email-input" required placeholder="Email Address" class="w-full bg-transparent border-b border-brand-border/30 py-3 pr-10 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
-                            <button type="button" id="next-btn" class="absolute right-0 top-1/2 -translate-y-1/2 text-brand-text/50 hover:text-brand-text transition-colors duration-700 p-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                            <input type="email" id="email-input" required placeholder="Email Address" class="w-full bg-transparent border-b border-brand-border/30 py-3 pr-12 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
+                            <!-- Z-index raised, type="button" strictly enforced -->
+                            <button type="button" id="next-btn" class="absolute right-0 top-1/2 -translate-y-1/2 text-brand-text/50 hover:text-brand-text transition-colors duration-700 p-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed z-50">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                             </button>
                         </div>
@@ -253,7 +254,8 @@
                     </div>
                 </form>
 
-                <div id="error-state" class="hidden text-red-500 text-xs mt-3 font-sans w-full text-center">Something went wrong. Please try again.</div>
+                <!-- Dedicated error state display -->
+                <div id="error-state" class="hidden text-red-500 text-xs mt-3 font-sans w-full text-center"></div>
 
                 <div id="success-state" class="hidden w-full flex items-center justify-center gap-3 py-3 border-b border-green-600/30 text-green-600 transition-colors duration-700 mt-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
@@ -301,7 +303,15 @@
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- 1. Cloud Storage Init ---
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const firebaseConfig = {
+          apiKey: "AIzaSyCU6i-IQsJdUKGqZcyZLoLMAel-_tLoaYA",
+          authDomain: "rasayanam-romania.firebaseapp.com",
+          projectId: "rasayanam-romania",
+          storageBucket: "rasayanam-romania.firebasestorage.app",
+          messagingSenderId: "706512837695",
+          appId: "1:706512837695:web:aea0884f124a833a842c8a",
+          measurementId: "G-JDCHWXVVHF"
+        };
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
@@ -389,7 +399,7 @@
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = 'Saving...';
                 try {
-                    const waitlistRef = collection(db, 'artifacts', appId, 'public', 'data', 'waitlist');
+                    const waitlistRef = collection(db, 'waitlist');
                     await addDoc(waitlistRef, {
                         name: name,
                         email: email,
