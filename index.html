@@ -129,9 +129,26 @@
             -webkit-text-fill-color: inherit !important;
             transition: background-color 5000s ease-in-out 0s;
         }
+
+        /* Custom Premium Text Selection */
+        ::selection {
+            background-color: #B08D57; /* Shilajit Gold */
+            color: #F9F9F6; /* Crisp off-white text */
+        }
+        ::-moz-selection {
+            background-color: #B08D57;
+            color: #F9F9F6;
+        }
+
+        /* Radio Pill Styles for Survey */
+        .radio-pill input:checked + div {
+            background-color: rgb(var(--text-main));
+            color: rgb(var(--brand-bg));
+            border-color: rgb(var(--text-main));
+        }
     </style>
 </head>
-<body class="antialiased flex flex-col min-h-screen selection:bg-brand-text selection:text-brand-bg relative scroll-smooth overflow-x-hidden">
+<body class="antialiased flex flex-col min-h-screen relative scroll-smooth overflow-x-hidden">
 
     <!-- ========================================== -->
     <!-- DYNAMIC BACKGROUND LAYERS                  -->
@@ -188,19 +205,57 @@
             </div>
 
             <!-- Email Collection -->
-            <div class="z-20 w-full max-w-md mt-4 flex flex-col items-center">
-                <p class="text-sm text-brand-muted mb-6 font-sans tracking-wide transition-colors duration-700">Be the first to experience the drop.</p>
+            <div class="z-20 w-full max-w-md mt-4 flex flex-col items-center min-h-[180px]">
+                <div id="form-headers" class="text-center transition-opacity duration-500">
+                    <p class="text-sm text-brand-muted mb-2 font-sans tracking-wide transition-colors duration-700">Be the first to experience the drop.</p>
+                    <p class="text-[11px] text-brand-muted/70 mb-8 font-sans tracking-widest uppercase transition-colors duration-700">e.g., Jane Doe, jane@auraroots.com</p>
+                </div>
                 
-                <form id="waitlist-form" class="w-full relative group transition-opacity duration-300">
-                    <input type="email" id="email-input" required placeholder="Join the waitlist" class="w-full bg-transparent border-b border-brand-border/30 py-3 pr-10 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
-                    <button type="submit" id="submit-btn" class="absolute right-0 top-1/2 -translate-y-1/2 text-brand-text/50 hover:text-brand-text transition-colors duration-700 p-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                    </button>
+                <form id="waitlist-form" class="w-full flex flex-col relative group transition-opacity duration-300">
+                    
+                    <!-- STEP 1: Name & Email -->
+                    <div id="step-1" class="w-full flex flex-col gap-4 transition-all duration-500 transform origin-top">
+                        <input type="text" id="name-input" required placeholder="Your Name" class="w-full bg-transparent border-b border-brand-border/30 py-3 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
+                        
+                        <div class="relative w-full group-focus-within:text-brand-text">
+                            <input type="email" id="email-input" required placeholder="Email Address" class="w-full bg-transparent border-b border-brand-border/30 py-3 pr-10 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
+                            <button type="button" id="next-btn" class="absolute right-0 top-1/2 -translate-y-1/2 text-brand-text/50 hover:text-brand-text transition-colors duration-700 p-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Survey -->
+                    <div id="step-2" class="w-full flex flex-col gap-6 absolute top-0 left-0 opacity-0 pointer-events-none transition-all duration-500 transform translate-y-4">
+                        <div class="flex flex-col gap-3">
+                            <label class="text-sm text-brand-text font-sans tracking-wide">Which product sparks your interest most?</label>
+                            <div class="flex flex-wrap gap-2">
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="product" value="Shilajit Resin" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Shilajit Resin</div></label>
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="product" value="Ashwagandha Root" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Ashwagandha Root</div></label>
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="product" value="Curcumin Extract" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Curcumin Extract</div></label>
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="product" value="All of them" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">All of them</div></label>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-3">
+                            <label class="text-sm text-brand-text font-sans tracking-wide">What matters most to you in a supplement?</label>
+                            <div class="flex flex-wrap gap-2">
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="value" value="Uncompromising Purity" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Uncompromising Purity</div></label>
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="value" value="Clinical Efficacy" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Clinical Efficacy</div></label>
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="value" value="Fair Pricing" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Fair Pricing</div></label>
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="value" value="Fast Delivery" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Fast Delivery</div></label>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="submit-btn" class="w-full py-3 mt-2 bg-brand-text text-brand-bg rounded-lg font-sans tracking-wide transition-opacity hover:opacity-90 flex items-center justify-center gap-2">
+                            Join the Waitlist
+                        </button>
+                    </div>
                 </form>
 
                 <div id="error-state" class="hidden text-red-500 text-xs mt-3 font-sans w-full text-center">Something went wrong. Please try again.</div>
 
-                <div id="success-state" class="hidden w-full flex items-center justify-center gap-3 py-3 border-b border-green-600/30 text-green-600 transition-colors duration-700">
+                <div id="success-state" class="hidden w-full flex items-center justify-center gap-3 py-3 border-b border-green-600/30 text-green-600 transition-colors duration-700 mt-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                     <span class="font-sans text-lg tracking-wide">You're on the list.</span>
                 </div>
@@ -217,9 +272,14 @@
                     <a href="mailto:hello@auraroots.com" class="hover:text-brand-text transition-colors underline decoration-transparent hover:decoration-brand-text underline-offset-4">hello@auraroots.com</a>
                 </div>
                 <div class="md:col-span-1 flex justify-start md:justify-center gap-6">
-                    <a href="#" class="text-brand-muted hover:text-brand-text transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                    <a href="#" class="text-brand-muted hover:text-brand-text transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
-                    <a href="#" class="text-brand-muted hover:text-brand-text transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg></a>
+                    <!-- Instagram -->
+                    <a href="#" class="text-brand-muted hover:text-[#E1306C] transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <!-- Facebook -->
+                    <a href="#" class="text-brand-muted hover:text-[#1877F2] transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                    <!-- TikTok -->
+                    <a href="#" class="text-brand-muted hover:text-[#25F4EE] transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                    <!-- YouTube -->
+                    <a href="#" class="text-brand-muted hover:text-[#FF0000] transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
                 </div>
                 <div class="md:col-span-1 md:text-right flex flex-col gap-2 items-start md:items-end">
                     <div class="flex gap-4">
@@ -280,23 +340,61 @@
             });
         });
 
-        // --- 4. Form Submission ---
+        // --- 4. Form Submission & Flow ---
+        const formHeaders = document.getElementById('form-headers');
         const form = document.getElementById('waitlist-form');
+        const step1 = document.getElementById('step-1');
+        const step2 = document.getElementById('step-2');
+        const nameInput = document.getElementById('name-input');
         const emailInput = document.getElementById('email-input');
+        const nextBtn = document.getElementById('next-btn');
         const submitBtn = document.getElementById('submit-btn');
+
+        // Handle Next Button (Move to Survey)
+        nextBtn.addEventListener('click', () => {
+            if (nameInput.checkValidity() && emailInput.checkValidity()) {
+                // Hide Step 1 & Headers
+                formHeaders.style.opacity = '0';
+                step1.style.opacity = '0';
+                step1.style.transform = 'translateY(-10px)';
+                step1.style.pointerEvents = 'none';
+
+                setTimeout(() => {
+                    formHeaders.style.display = 'none';
+                    step1.style.position = 'absolute';
+                    
+                    // Show Step 2
+                    step2.style.position = 'relative';
+                    step2.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                    step2.classList.add('opacity-100', 'translate-y-0');
+                }, 500);
+            } else {
+                // Trigger native browser validation UI
+                form.reportValidity();
+            }
+        });
         
+        // Handle Final Submit
         form.addEventListener('submit', async (e) => {
             e.preventDefault(); 
             if (!currentUser) return;
+            const name = nameInput.value;
             const email = emailInput.value;
             
-            if(email) {
-                emailInput.disabled = true;
+            // Gather survey data
+            const productInterest = document.querySelector('input[name="product"]:checked')?.value || 'Did not specify';
+            const valueInterest = document.querySelector('input[name="value"]:checked')?.value || 'Did not specify';
+            
+            if(email && name) {
                 submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Saving...';
                 try {
                     const waitlistRef = collection(db, 'artifacts', appId, 'public', 'data', 'waitlist');
                     await addDoc(waitlistRef, {
+                        name: name,
                         email: email,
+                        productInterest: productInterest,
+                        primaryValue: valueInterest,
                         userId: currentUser.uid,
                         timestamp: serverTimestamp(),
                         hoverEngagements: hoverStats
@@ -313,8 +411,8 @@
                     }, 300);
                 } catch (error) {
                     console.error("Save failed:", error);
-                    emailInput.disabled = false;
                     submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Join the Waitlist';
                     document.getElementById('error-state').classList.remove('hidden');
                 }
             }
