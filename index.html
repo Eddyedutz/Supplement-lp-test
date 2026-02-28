@@ -51,9 +51,9 @@
         }
 
         /* --- Global Background Transitions --- */
-        .bg-shilajit-layer { background-image: url('https://github.com/Eddyedutz/Supplement-lp-test/blob/fd065073776b846c7eb92850fa2f41f0e8df0121/shilajit-background.png'); }
-        .bg-ashwa-layer { background-image: url('https://github.com/Eddyedutz/Supplement-lp-test/blob/142a8ac7a1ae83ac25cb4f012472e20c98bb332f/ash-background.png'); }
-        .bg-curcumin-layer { background-image: url('https://github.com/Eddyedutz/Supplement-lp-test/blob/fd065073776b846c7eb92850fa2f41f0e8df0121/curcumin-background.png'); }
+        .bg-shilajit-layer { background-image: url('https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/fd065073776b846c7eb92850fa2f41f0e8df0121/shilajit-background.png'); }
+        .bg-ashwa-layer { background-image: url('https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/fd065073776b846c7eb92850fa2f41f0e8df0121/ash-background.png'); }
+        .bg-curcumin-layer { background-image: url('https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/fd065073776b846c7eb92850fa2f41f0e8df0121/curcumin-background.png'); }
 
         body:has(.group-shilajit:hover) .bg-shilajit-layer,
         body:has(.group-ashwa:hover) .bg-ashwa-layer,
@@ -68,29 +68,31 @@
 
         .spotlight {
             position: absolute;
-            inset: -40%;
-            border-radius: 50%;
+            inset: -5%;
+            border-radius: 24px;
             opacity: 0;
             transition: opacity 0.7s ease;
             z-index: 0;
             pointer-events: none;
+            background-color: rgba(255, 255, 255, 0.95);
+            filter: blur(15px); /* Creates the blurred rounded square effect */
         }
 
         /* Shilajit Interactions */
-        .group-shilajit:hover .bottle { transform: translateY(-12px); }
+        .group-shilajit:hover .bottle { transform: scale(1.15); }
         .group-shilajit:hover .spotlight { opacity: 1; }
-        .spotlight-shilajit { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 25%, rgba(176,141,87,0.7) 50%, rgba(176,141,87,0) 75%); }
+        .spotlight-shilajit { box-shadow: 0 0 15px 15px rgba(176,141,87,0.35); }
 
         /* Ashwagandha Interactions */
-        .group-ashwa:hover .bottle { transform: scale(1.05); }
+        .group-ashwa:hover .bottle { transform: scale(1.15); }
         .group-ashwa:hover .spotlight { opacity: 1; }
-        .spotlight-ashwa { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 25%, rgba(85,107,47,0.7) 50%, rgba(85,107,47,0) 75%); }
+        .spotlight-ashwa { box-shadow: 0 0 15px 15px rgba(85,107,47,0.35); }
 
         /* Curcumin Interactions */
         .curcumin-scene { perspective: 1000px; }
-        .group-curcumin:hover .bottle { transform: scale(1.05) rotate(3deg); }
+        .group-curcumin:hover .bottle { transform: scale(1.15); }
         .group-curcumin:hover .spotlight { opacity: 1; }
-        .spotlight-curcumin { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 25%, rgba(230,126,34,0.7) 50%, rgba(230,126,34,0) 75%); }
+        .spotlight-curcumin { box-shadow: 0 0 15px 15px rgba(230,126,34,0.35); }
 
         /* Input Autofill override */
         input:-webkit-autofill {
@@ -122,29 +124,29 @@
             
             <div class="text-center z-20 mb-16 md:mb-24 mt-8 transition-colors duration-700">
                 <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl tracking-tight mb-4 text-brand-text cursor-default transition-colors duration-700">
-                    AURA&nbsp;ROOTS
+                    RASAYANAM&nbsp;
                 </h1>
                 <p class="font-sans text-xs md:text-sm tracking-[0.3em] uppercase text-brand-muted cursor-default transition-colors duration-700">
-                    Ancient Wisdom, Modern Clarity. Coming Fall 2026.
+                    Ancient Wisdom, Modern Clarity. Coming Summer 2026 in Romania.
                 </p>
             </div>
 
-            <div class="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24 lg:gap-32 w-full max-w-6xl z-20 mb-16">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 lg:gap-24 w-full max-w-6xl z-20 mb-16">
                 
                 <!-- 1. Shilajit -->
-                <div class="group group-shilajit relative w-40 h-56 cursor-pointer flex justify-center items-center" data-product="Shilajit">
+                <div class="group group-shilajit relative w-48 h-64 lg:w-60 lg:h-80 cursor-pointer flex justify-center items-center" data-product="Shilajit">
                     <div class="spotlight spotlight-shilajit"></div>
                     <img src="https://rasayanam.in/cdn/shop/files/01-ShilajitCatalogue.webp?v=1765968940" alt="Shilajit" class="bottle relative z-10 w-full h-full object-contain drop-shadow-2xl mix-blend-multiply">
                 </div>
 
                 <!-- 2. Ashwagandha -->
-                <div class="group group-ashwa relative w-40 h-56 cursor-pointer flex justify-center items-center" data-product="Ashwagandha">
+                <div class="group group-ashwa relative w-48 h-64 lg:w-60 lg:h-80 cursor-pointer flex justify-center items-center" data-product="Ashwagandha">
                     <div class="spotlight spotlight-ashwa"></div>
                     <img src="https://rasayanam.in/cdn/shop/files/01ksmcatalogue.webp?v=1762862941" alt="Ashwagandha" class="bottle relative z-10 w-full h-full object-contain drop-shadow-2xl mix-blend-multiply">
                 </div>
 
                 <!-- 3. Curcumin -->
-                <div class="group group-curcumin curcumin-scene relative w-40 h-56 cursor-pointer flex justify-center items-center" data-product="Curcumin">
+                <div class="group group-curcumin curcumin-scene relative w-48 h-64 lg:w-60 lg:h-80 cursor-pointer flex justify-center items-center" data-product="Curcumin">
                     <div class="spotlight spotlight-curcumin"></div>
                     <img src="https://rasayanam.in/cdn/shop/files/01-Curcumin_Catalogue.webp?v=1765969550" alt="Curcumin" class="bottle relative z-10 w-full h-full object-contain drop-shadow-2xl mix-blend-multiply">
                 </div>
