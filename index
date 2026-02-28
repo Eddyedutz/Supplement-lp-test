@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apothecary | Ancient Wisdom, Modern Clarity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-bg': '#F9F9F6',
+                        'brand-text': 'rgb(var(--text-main) / <alpha-value>)',
+                        'brand-muted': 'rgb(var(--text-muted) / <alpha-value>)',
+                        'brand-border': 'rgb(var(--border-color) / <alpha-value>)',
+                        'shilajit': '#B08D57',
+                        'ashwa': '#556B2F',
+                        'curcumin': '#E67E22',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            /* Default Light Mode */
+            --text-main: 34, 34, 34;       /* #222222 */
+            --text-muted: 107, 114, 128;   /* #6b7280 */
+            --border-color: 34, 34, 34;    /* #222222 */
+        }
+
+        /* Smart Inversion when ANY product is hovered */
+        body:has(.group:hover) {
+            --text-main: 249, 249, 246;    /* #F9F9F6 */
+            --text-muted: 209, 213, 219;   /* #d1d5db */
+            --border-color: 249, 249, 246; /* #F9F9F6 */
+        }
+
+        body {
+            background-color: transparent;
+            color: rgb(var(--text-main));
+            transition: color 0.7s ease;
+        }
+
+        /* --- Global Background Transitions --- */
+        .bg-shilajit-layer { background-image: url('shilajit-background.jpg'); }
+        .bg-ashwa-layer { background-image: url('ash-background.jpg'); }
+        .bg-curcumin-layer { background-image: url('curcumin-background.jpg'); }
+
+        body:has(.group-shilajit:hover) .bg-shilajit-layer,
+        body:has(.group-ashwa:hover) .bg-ashwa-layer,
+        body:has(.group-curcumin:hover) .bg-curcumin-layer { opacity: 1; }
+
+        body:has(.group:hover) .bg-dark-overlay { opacity: 1; }
+
+        /* --- Product Animations & Spotlights --- */
+        .bottle {
+            transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .spotlight {
+            position: absolute;
+            inset: -40%;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.7s ease;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Shilajit Interactions */
+        .group-shilajit:hover .bottle { transform: translateY(-12px); }
+        .group-shilajit:hover .spotlight { opacity: 1; }
+        .spotlight-shilajit { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 25%, rgba(176,141,87,0.7) 50%, rgba(176,141,87,0) 75%); }
+
+        /* Ashwagandha Interactions */
+        .group-ashwa:hover .bottle { transform: scale(1.05); }
+        .group-ashwa:hover .spotlight { opacity: 1; }
+        .spotlight-ashwa { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 25%, rgba(85,107,47,0.7) 50%, rgba(85,107,47,0) 75%); }
+
+        /* Curcumin Interactions */
+        .curcumin-scene { perspective: 1000px; }
+        .group-curcumin:hover .bottle { transform: scale(1.05) rotate(3deg); }
+        .group-curcumin:hover .spotlight { opacity: 1; }
+        .spotlight-curcumin { background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 25%, rgba(230,126,34,0.7) 50%, rgba(230,126,34,0) 75%); }
+
+        /* Input Autofill override */
+        input:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+            -webkit-text-fill-color: inherit !important;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen selection:bg-brand-text selection:text-brand-bg relative scroll-smooth overflow-x-hidden">
+
+    <!-- ========================================== -->
+    <!-- DYNAMIC BACKGROUND LAYERS                  -->
+    <!-- ========================================== -->
+    <div class="fixed inset-0 z-0 pointer-events-none bg-brand-bg transition-colors duration-700">
+        <div class="bg-shilajit-layer absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-700"></div>
+        <div class="bg-ashwa-layer absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-700"></div>
+        <div class="bg-curcumin-layer absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-700"></div>
+        <!-- Darkening overlay to ensure text stays perfectly legible against light/busy areas of the images -->
+        <div class="bg-dark-overlay absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-700"></div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- THE LANDING PAGE CONTENT                   -->
+    <!-- ========================================== -->
+    <div id="landing-view" class="flex flex-col min-h-screen w-full relative z-10">
+        <!-- SECTION 1: MAIN STAGE -->
+        <main class="flex-grow flex flex-col items-center justify-center px-6 py-12 relative w-full overflow-hidden">
+            
+            <div class="text-center z-20 mb-16 md:mb-24 mt-8 transition-colors duration-700">
+                <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl tracking-tight mb-4 text-brand-text cursor-default transition-colors duration-700">
+                    AURA&nbsp;ROOTS
+                </h1>
+                <p class="font-sans text-xs md:text-sm tracking-[0.3em] uppercase text-brand-muted cursor-default transition-colors duration-700">
+                    Ancient Wisdom, Modern Clarity. Coming Fall 2026.
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-24 lg:gap-32 w-full max-w-6xl z-20 mb-16">
+                
+                <!-- 1. Shilajit -->
+                <div class="group group-shilajit relative w-40 h-56 cursor-pointer flex justify-center items-center" data-product="Shilajit">
+                    <div class="spotlight spotlight-shilajit"></div>
+                    <img src="https://rasayanam.in/cdn/shop/files/01-ShilajitCatalogue.webp?v=1765968940" alt="Shilajit" class="bottle relative z-10 w-full h-full object-contain drop-shadow-2xl mix-blend-multiply">
+                </div>
+
+                <!-- 2. Ashwagandha -->
+                <div class="group group-ashwa relative w-40 h-56 cursor-pointer flex justify-center items-center" data-product="Ashwagandha">
+                    <div class="spotlight spotlight-ashwa"></div>
+                    <img src="https://rasayanam.in/cdn/shop/files/01ksmcatalogue.webp?v=1762862941" alt="Ashwagandha" class="bottle relative z-10 w-full h-full object-contain drop-shadow-2xl mix-blend-multiply">
+                </div>
+
+                <!-- 3. Curcumin -->
+                <div class="group group-curcumin curcumin-scene relative w-40 h-56 cursor-pointer flex justify-center items-center" data-product="Curcumin">
+                    <div class="spotlight spotlight-curcumin"></div>
+                    <img src="https://rasayanam.in/cdn/shop/files/01-Curcumin_Catalogue.webp?v=1765969550" alt="Curcumin" class="bottle relative z-10 w-full h-full object-contain drop-shadow-2xl mix-blend-multiply">
+                </div>
+            </div>
+
+            <!-- Email Collection -->
+            <div class="z-20 w-full max-w-md mt-4 flex flex-col items-center">
+                <p class="text-sm text-brand-muted mb-6 font-sans tracking-wide transition-colors duration-700">Be the first to experience the drop.</p>
+                
+                <form id="waitlist-form" class="w-full relative group transition-opacity duration-300">
+                    <input type="email" id="email-input" required placeholder="Join the waitlist" class="w-full bg-transparent border-b border-brand-border/30 py-3 pr-10 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
+                    <button type="submit" id="submit-btn" class="absolute right-0 top-1/2 -translate-y-1/2 text-brand-text/50 hover:text-brand-text transition-colors duration-700 p-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </form>
+
+                <div id="error-state" class="hidden text-red-500 text-xs mt-3 font-sans w-full text-center">Something went wrong. Please try again.</div>
+
+                <div id="success-state" class="hidden w-full flex items-center justify-center gap-3 py-3 border-b border-green-600/30 text-green-600 transition-colors duration-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    <span class="font-sans text-lg tracking-wide">You're on the list.</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="mt-auto border-t border-brand-border/10 py-8 px-6 md:px-12 w-full z-20 transition-colors duration-700">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4 items-start text-xs text-brand-muted font-sans tracking-wide leading-relaxed">
+                <div class="md:col-span-1">
+                    <p>Sourcing the world’s most potent adaptogens. Formulated for the modern mind and body.</p>
+                </div>
+                <div class="md:col-span-1 md:text-center">
+                    <a href="mailto:hello@auraroots.com" class="hover:text-brand-text transition-colors underline decoration-transparent hover:decoration-brand-text underline-offset-4">hello@auraroots.com</a>
+                </div>
+                <div class="md:col-span-1 flex justify-start md:justify-center gap-6">
+                    <a href="#" class="text-brand-muted hover:text-brand-text transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                    <a href="#" class="text-brand-muted hover:text-brand-text transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                    <a href="#" class="text-brand-muted hover:text-brand-text transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"></path><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path></svg></a>
+                </div>
+                <div class="md:col-span-1 md:text-right flex flex-col gap-2 items-start md:items-end">
+                    <div class="flex gap-4">
+                        <a href="#" class="hover:text-brand-text transition-colors">Privacy</a>
+                        <a href="#" class="hover:text-brand-text transition-colors">Terms</a>
+                    </div>
+                    <p class="text-[10px] opacity-70 max-w-[200px] mt-2 leading-tight">
+                        *These statements have not been evaluated by the FDA.
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Firebase Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- 1. Cloud Storage Init ---
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        let currentUser = null;
+
+        // --- 2. Secure Auth ---
+        const initAuth = async () => {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) { console.error("Auth failed:", error); }
+        };
+        initAuth();
+
+        onAuthStateChanged(auth, (user) => { currentUser = user; });
+
+        // --- 3. Heatmap Tracking ---
+        let hoverStats = { Shilajit: 0, Ashwagandha: 0, Curcumin: 0 };
+        const products = document.querySelectorAll('[data-product]');
+        let hoverTimers = {};
+
+        products.forEach(product => {
+            const productName = product.getAttribute('data-product');
+            product.addEventListener('mouseenter', () => {
+                hoverTimers[productName] = setTimeout(() => {
+                    hoverStats[productName]++;
+                }, 400); 
+            });
+            product.addEventListener('mouseleave', () => {
+                if (hoverTimers[productName]) clearTimeout(hoverTimers[productName]);
+            });
+        });
+
+        // --- 4. Form Submission ---
+        const form = document.getElementById('waitlist-form');
+        const emailInput = document.getElementById('email-input');
+        const submitBtn = document.getElementById('submit-btn');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+            if (!currentUser) return;
+            const email = emailInput.value;
+            
+            if(email) {
+                emailInput.disabled = true;
+                submitBtn.disabled = true;
+                try {
+                    const waitlistRef = collection(db, 'artifacts', appId, 'public', 'data', 'waitlist');
+                    await addDoc(waitlistRef, {
+                        email: email,
+                        userId: currentUser.uid,
+                        timestamp: serverTimestamp(),
+                        hoverEngagements: hoverStats
+                    });
+
+                    form.style.opacity = '0';
+                    setTimeout(() => {
+                        form.classList.add('hidden');
+                        document.getElementById('success-state').classList.remove('hidden');
+                        requestAnimationFrame(() => {
+                            document.getElementById('success-state').style.transition = 'opacity 0.5s ease';
+                            document.getElementById('success-state').style.opacity = '1';
+                        });
+                    }, 300);
+                } catch (error) {
+                    console.error("Save failed:", error);
+                    emailInput.disabled = false;
+                    submitBtn.disabled = false;
+                    document.getElementById('error-state').classList.remove('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
