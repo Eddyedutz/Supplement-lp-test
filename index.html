@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Prevents mobile browsers from auto-forcing a dark mode inversion -->
-    <meta name="color-scheme" content="light">
+    <meta name="color-scheme" content="only light">
     <title>Apothecary | Ancient Wisdom, Modern Clarity</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -33,15 +33,17 @@
 
     <style>
         :root {
+            color-scheme: only light;
             /* Default Light Mode */
             --text-main: 34, 34, 34;       /* #222222 */
             --text-muted: 107, 114, 128;   /* #6b7280 */
             --border-color: 34, 34, 34;    /* #222222 */
         }
 
-        /* Remove mobile tap highlight (gray/black transparent box) */
+        /* Remove mobile tap highlight and focus rings completely */
         * {
-            -webkit-tap-highlight-color: transparent;
+            -webkit-tap-highlight-color: transparent !important;
+            outline: none !important;
         }
 
         /* Smart Inversion when ANY product is hovered */
@@ -52,8 +54,10 @@
         }
 
         body {
-            background-color: transparent;
-            color: rgb(var(--text-main));
+            /* Linear gradient hack defeats forced mobile dark modes */
+            background-color: #F9F9F6 !important;
+            background-image: linear-gradient(#F9F9F6, #F9F9F6) !important;
+            color: rgb(var(--text-main)) !important;
             transition: color 0.7s ease;
         }
 
@@ -85,6 +89,9 @@
             overflow: hidden;
             transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
             will-change: transform;
+            /* Prevents weird 1px artifact borders during composite */
+            transform: translateZ(0);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.01);
         }
 
         .bottle {
@@ -101,8 +108,9 @@
             transition: opacity 0.7s ease;
             z-index: 0;
             pointer-events: none;
-            /* Solid white backing ensures mix-blend-multiply works perfectly */
-            background-color: #ffffff; 
+            /* Gradient Hack: Ensures spotlight stays pure white even in forced dark mode so multiply blending works */
+            background-color: #ffffff !important;
+            background-image: linear-gradient(#ffffff, #ffffff) !important; 
         }
 
         /* Hover Zoom Interactions */
@@ -110,7 +118,7 @@
         .group:hover .bottle { transform: scale(1.20); }
         .group:hover .spotlight { opacity: 1; }
 
-        /* Themed Spotlights (Using strong soft box-shadow instead of bugged CSS filters) */
+        /* Themed Spotlights */
         .spotlight-shilajit { box-shadow: 0 0 40px 15px rgba(176,141,87,0.4); }
         .spotlight-ashwa { box-shadow: 0 0 40px 15px rgba(85,107,47,0.4); }
         .spotlight-curcumin { box-shadow: 0 0 40px 15px rgba(230,126,34,0.4); }
@@ -128,7 +136,7 @@
     <!-- ========================================== -->
     <!-- DYNAMIC BACKGROUND LAYERS                  -->
     <!-- ========================================== -->
-    <div class="fixed inset-0 z-0 pointer-events-none bg-brand-bg transition-colors duration-700">
+    <div class="fixed inset-0 z-0 pointer-events-none transition-colors duration-700" style="background-color: #F9F9F6; background-image: linear-gradient(#F9F9F6, #F9F9F6);">
         <div class="bg-shilajit-layer absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-700"></div>
         <div class="bg-ashwa-layer absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-700"></div>
         <div class="bg-curcumin-layer absolute inset-0 bg-cover bg-center opacity-0 transition-opacity duration-700"></div>
@@ -145,7 +153,7 @@
             
             <div class="text-center z-20 mb-16 md:mb-24 mt-8 transition-colors duration-700">
                 <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl tracking-tight mb-4 text-brand-text cursor-default transition-colors duration-700">
-                    RASAYANAM&nbsp;
+                    RASAYANAM
                 </h1>
                 <p class="font-sans text-xs md:text-sm tracking-[0.3em] uppercase text-brand-muted cursor-default transition-colors duration-700">
                     Ancient Wisdom, Modern Clarity. Coming Summer 2026 in Romania.
