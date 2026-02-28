@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prevents mobile browsers from auto-forcing a dark mode inversion -->
+    <meta name="color-scheme" content="light">
     <title>Apothecary | Ancient Wisdom, Modern Clarity</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -93,14 +95,14 @@
 
         .spotlight {
             position: absolute;
-            inset: -5%;
+            inset: 0;
             border-radius: 24px;
             opacity: 0;
             transition: opacity 0.7s ease;
             z-index: 0;
             pointer-events: none;
-            background-color: rgba(255, 255, 255, 0.95);
-            filter: blur(15px); /* Creates the blurred rounded square effect */
+            /* Solid white backing ensures mix-blend-multiply works perfectly */
+            background-color: #ffffff; 
         }
 
         /* Hover Zoom Interactions */
@@ -108,10 +110,10 @@
         .group:hover .bottle { transform: scale(1.20); }
         .group:hover .spotlight { opacity: 1; }
 
-        /* Themed Spotlights */
-        .spotlight-shilajit { box-shadow: 0 0 15px 15px rgba(176,141,87,0.35); }
-        .spotlight-ashwa { box-shadow: 0 0 15px 15px rgba(85,107,47,0.35); }
-        .spotlight-curcumin { box-shadow: 0 0 15px 15px rgba(230,126,34,0.35); }
+        /* Themed Spotlights (Using strong soft box-shadow instead of bugged CSS filters) */
+        .spotlight-shilajit { box-shadow: 0 0 40px 15px rgba(176,141,87,0.4); }
+        .spotlight-ashwa { box-shadow: 0 0 40px 15px rgba(85,107,47,0.4); }
+        .spotlight-curcumin { box-shadow: 0 0 40px 15px rgba(230,126,34,0.4); }
 
         /* Input Autofill override */
         input:-webkit-autofill {
