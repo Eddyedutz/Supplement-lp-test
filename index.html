@@ -37,6 +37,11 @@
             --border-color: 34, 34, 34;    /* #222222 */
         }
 
+        /* Remove mobile tap highlight (gray/black transparent box) */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
         /* Smart Inversion when ANY product is hovered */
         body:has(.group:hover) {
             --text-main: 249, 249, 246;    /* #F9F9F6 */
@@ -55,15 +60,24 @@
         .bg-ashwa-layer { background-image: url('https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/fd065073776b846c7eb92850fa2f41f0e8df0121/ash-background.png'); }
         .bg-curcumin-layer { background-image: url('https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/fd065073776b846c7eb92850fa2f41f0e8df0121/curcumin-background.png'); }
 
-        body:has(.group-shilajit:hover) .bg-shilajit-layer,
-        body:has(.group-ashwa:hover) .bg-ashwa-layer,
-        body:has(.group-curcumin:hover) .bg-curcumin-layer { opacity: 1; }
+        /* The Parallax Background Zoom Effect */
+        .bg-shilajit-layer, .bg-ashwa-layer, .bg-curcumin-layer {
+            transition: opacity 0.7s ease, transform 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: scale(1.0);
+            will-change: transform, opacity;
+        }
+
+        body:has(.group-shilajit:hover) .bg-shilajit-layer { opacity: 1; transform: scale(1.08); }
+        body:has(.group-ashwa:hover) .bg-ashwa-layer { opacity: 1; transform: scale(1.08); }
+        body:has(.group-curcumin:hover) .bg-curcumin-layer { opacity: 1; transform: scale(1.08); }
 
         body:has(.group:hover) .bg-dark-overlay { opacity: 1; }
 
         /* --- Product Animations & Spotlights --- */
         .bottle {
             transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-origin: center center;
+            will-change: transform;
         }
 
         .spotlight {
@@ -79,18 +93,18 @@
         }
 
         /* Shilajit Interactions */
-        .group-shilajit:hover .bottle { transform: scale(1.25); }
+        .group-shilajit:hover .bottle { transform: scale(1.15); }
         .group-shilajit:hover .spotlight { opacity: 1; }
         .spotlight-shilajit { box-shadow: 0 0 15px 15px rgba(176,141,87,0.35); }
 
         /* Ashwagandha Interactions */
-        .group-ashwa:hover .bottle { transform: scale(1.25); }
+        .group-ashwa:hover .bottle { transform: scale(1.15); }
         .group-ashwa:hover .spotlight { opacity: 1; }
         .spotlight-ashwa { box-shadow: 0 0 15px 15px rgba(85,107,47,0.35); }
 
         /* Curcumin Interactions */
         .curcumin-scene { perspective: 1000px; }
-        .group-curcumin:hover .bottle { transform: scale(1.25); }
+        .group-curcumin:hover .bottle { transform: scale(1.15); }
         .group-curcumin:hover .spotlight { opacity: 1; }
         .spotlight-curcumin { box-shadow: 0 0 15px 15px rgba(230,126,34,0.35); }
 
