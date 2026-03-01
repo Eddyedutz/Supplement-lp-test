@@ -53,6 +53,11 @@
             --border-color: 249, 249, 246; /* #F9F9F6 */
         }
 
+        /* Inverts the black logo to white on hover */
+        body:has(.group:hover) .dynamic-logo {
+            filter: invert(1);
+        }
+
         body {
             /* Linear gradient hack defeats forced mobile dark modes */
             background-color: #F9F9F6 !important;
@@ -182,10 +187,10 @@
             
             <div class="text-center z-20 mb-16 md:mb-24 mt-8 transition-colors duration-700 flex flex-col items-center">
                 <h1 class="sr-only">HARA</h1>
-                <!-- CSS Mask Logo: This takes the shape of the PNG but fills it with the transitioning brand text color -->
-                <div class="w-48 h-16 md:w-72 md:h-24 lg:w-96 lg:h-28 bg-brand-text transition-colors duration-700 mb-6" 
-                     style="-webkit-mask-image: url('https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/refs/heads/main/logo-nobg.png'); mask-size: contain; mask-repeat: no-repeat; mask-position: center;">
-                </div>
+                
+                <!-- Simple Image with CSS Filter inversion instead of buggy CSS masks -->
+                <img src="https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/refs/heads/main/logo-nobg.png" alt="HARA Logo" class="dynamic-logo w-48 h-16 md:w-72 md:h-24 lg:w-96 lg:h-28 object-contain mb-6 transition-all duration-700 pointer-events-none" style="-webkit-user-drag: none;">
+                
                 <p class="font-sans text-xs md:text-sm tracking-[0.3em] uppercase text-brand-muted cursor-default transition-colors duration-700">
                     Ancient Wisdom, Modern Clarity. Coming Summer 2026 in Romania.
                 </p>
