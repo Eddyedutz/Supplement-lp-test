@@ -180,10 +180,12 @@
         <!-- SECTION 1: MAIN STAGE -->
         <main class="flex-grow flex flex-col items-center justify-center px-6 py-12 relative w-full overflow-hidden">
             
-            <div class="text-center z-20 mb-16 md:mb-24 mt-8 transition-colors duration-700">
-                <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl tracking-tight mb-4 text-brand-text cursor-default transition-colors duration-700">
-                    HARA
-                </h1>
+            <div class="text-center z-20 mb-16 md:mb-24 mt-8 transition-colors duration-700 flex flex-col items-center">
+                <h1 class="sr-only">HARA</h1>
+                <!-- CSS Mask Logo: This takes the shape of the PNG but fills it with the transitioning brand text color -->
+                <div class="w-48 h-16 md:w-72 md:h-24 lg:w-96 lg:h-28 bg-brand-text transition-colors duration-700 mb-6" 
+                     style="-webkit-mask-image: url('https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/refs/heads/main/logo-nobg.png'); mask-size: contain; mask-repeat: no-repeat; mask-position: center;">
+                </div>
                 <p class="font-sans text-xs md:text-sm tracking-[0.3em] uppercase text-brand-muted cursor-default transition-colors duration-700">
                     Ancient Wisdom, Modern Clarity. Coming Summer 2026 in Romania.
                 </p>
@@ -191,19 +193,19 @@
 
             <div class="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 lg:gap-24 w-full max-w-6xl z-20 mb-16">
                 
-                <!-- 1. Shilajit -->
-                <div class="group group-shilajit relative w-64 h-64 lg:w-80 lg:h-80 cursor-pointer flex justify-center items-center" data-product="Shilajit">
-                    <div class="spotlight spotlight-shilajit"></div>
-                    <div class="img-wrapper mix-blend-multiply">
-                        <img src="https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/9b822552c475f047b9153ce527ad59bda25b5f17/shilajit-ideal.png">
-                    </div>
-                </div>
-
-                <!-- 2. Ashwagandha -->
+                <!-- 1. Ashwagandha (Moved to Left) -->
                 <div class="group group-ashwa relative w-64 h-64 lg:w-80 lg:h-80 cursor-pointer flex justify-center items-center" data-product="Ashwagandha">
                     <div class="spotlight spotlight-ashwa"></div>
                     <div class="img-wrapper mix-blend-multiply">
-                        <img src="https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/9b822552c475f047b9153ce527ad59bda25b5f17/ash-ideal.png">
+                        <img src="https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/refs/heads/main/ash-ideal.png" alt="Ashwagandha" class="bottle w-full h-full object-contain drop-shadow-2xl">
+                    </div>
+                </div>
+
+                <!-- 2. Shilajit (Moved to Center) -->
+                <div class="group group-shilajit relative w-64 h-64 lg:w-80 lg:h-80 cursor-pointer flex justify-center items-center" data-product="Shilajit">
+                    <div class="spotlight spotlight-shilajit"></div>
+                    <div class="img-wrapper mix-blend-multiply">
+                        <img src="https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/refs/heads/main/shilajit-ideal.png" alt="Shilajit" class="bottle w-full h-full object-contain drop-shadow-2xl">
                     </div>
                 </div>
 
@@ -211,7 +213,7 @@
                 <div class="group group-curcumin relative w-64 h-64 lg:w-80 lg:h-80 cursor-pointer flex justify-center items-center" data-product="Curcumin">
                     <div class="spotlight spotlight-curcumin"></div>
                     <div class="img-wrapper mix-blend-multiply">
-                        <img src="https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/9b822552c475f047b9153ce527ad59bda25b5f17/curcumin-ideal.png">
+                        <img src="https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/refs/heads/main/curcumin-ideal.png" alt="Curcumin" class="bottle w-full h-full object-contain drop-shadow-2xl">
                     </div>
                 </div>
             </div>
