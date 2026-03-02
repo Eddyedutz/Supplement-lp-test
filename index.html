@@ -118,9 +118,9 @@
             background-image: linear-gradient(#ffffff, #ffffff) !important; 
         }
 
-        /* Hover Zoom Interactions */
+        /* Hover Zoom Interactions - Added a slight upward lift to make room for text */
         .group:hover .img-wrapper { transform: scale(1.05); }
-        .group:hover .bottle { transform: scale(1.20); }
+        .group:hover .bottle { transform: scale(1.20) translateY(-8px); }
         .group:hover .spotlight { opacity: 1; }
 
         /* Themed Spotlights */
@@ -152,18 +152,6 @@
             border-color: rgb(var(--text-main));
         }
     </style>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JDCHWXVVHF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-JDCHWXVVHF');
-</script>
-    
-    
 </head>
 <body class="antialiased flex flex-col min-h-screen relative scroll-smooth overflow-x-hidden">
 
@@ -188,21 +176,27 @@
             <div class="text-center z-20 mb-16 md:mb-24 mt-8 transition-colors duration-700 flex flex-col items-center">
                 <h1 class="sr-only">HARA</h1>
                 
-                <!-- Simple Image with CSS Filter inversion instead of buggy CSS masks -->
+                <!-- Simple Image with CSS Filter inversion -->
                 <img src="https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/refs/heads/main/logo-nobg.png" alt="HARA Logo" class="dynamic-logo w-48 h-16 md:w-72 md:h-24 lg:w-96 lg:h-28 object-contain mb-6 transition-all duration-700 pointer-events-none" style="-webkit-user-drag: none;">
                 
                 <p class="font-sans text-xs md:text-sm tracking-[0.3em] uppercase text-brand-muted cursor-default transition-colors duration-700">
-                    Ancient Wisdom, Modern Clarity. Coming Summer 2026 in Romania.
+                    Înțelepciune ancestrală, claritate modernă. Din vara lui 2026, în România.
                 </p>
             </div>
 
-            <div class="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 lg:gap-24 w-full max-w-6xl z-20 mb-16">
+            <!-- Products Grid: Increased gap to gap-28 on mobile to make room for text -->
+            <div class="flex flex-col md:flex-row items-center justify-center gap-28 md:gap-16 lg:gap-24 w-full max-w-6xl z-20 mb-28 lg:mb-32">
                 
                 <!-- 1. Ashwagandha (Moved to Left) -->
                 <div class="group group-ashwa relative w-64 h-64 lg:w-80 lg:h-80 cursor-pointer flex justify-center items-center" data-product="Ashwagandha">
                     <div class="spotlight spotlight-ashwa"></div>
                     <div class="img-wrapper mix-blend-multiply">
                         <img src="https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/refs/heads/main/ash-ideal.png" alt="Ashwagandha" class="bottle w-full h-full object-contain drop-shadow-2xl">
+                    </div>
+                    <!-- Hover Text Details (Anchored to top so it grows downwards) -->
+                    <div class="absolute top-full mt-4 md:mt-6 left-0 w-full px-2 text-center opacity-0 transform translate-y-4 transition-all duration-700 ease-out group-hover:opacity-100 group-hover:translate-y-0 z-20 pointer-events-none">
+                        <h3 class="font-serif text-xl lg:text-2xl text-brand-text mb-1.5 transition-colors duration-700">Ashwagandha Root</h3>
+                        <p class="font-sans text-[10px] lg:text-xs tracking-widest uppercase text-brand-muted transition-colors duration-700">Echilibru Profund. Regăsește-ți centrul în haosul cotidian.</p>
                     </div>
                 </div>
 
@@ -212,6 +206,11 @@
                     <div class="img-wrapper mix-blend-multiply">
                         <img src="https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/refs/heads/main/shilajit-ideal.png" alt="Shilajit" class="bottle w-full h-full object-contain drop-shadow-2xl">
                     </div>
+                    <!-- Hover Text Details (Anchored to top so it grows downwards) -->
+                    <div class="absolute top-full mt-4 md:mt-6 left-0 w-full px-2 text-center opacity-0 transform translate-y-4 transition-all duration-700 ease-out group-hover:opacity-100 group-hover:translate-y-0 z-20 pointer-events-none">
+                        <h3 class="font-serif text-xl lg:text-2xl text-brand-text mb-1.5 transition-colors duration-700">Shilajit Resin</h3>
+                        <p class="font-sans text-[10px] lg:text-xs tracking-widest uppercase text-brand-muted transition-colors duration-700">Energie Primordială. Pentru cei îndrăzneți și puternici.</p>
+                    </div>
                 </div>
 
                 <!-- 3. Curcumin -->
@@ -220,24 +219,29 @@
                     <div class="img-wrapper mix-blend-multiply">
                         <img src="https://raw.githubusercontent.com/Eddyedutz/Supplement-lp-test/refs/heads/main/curcumin-ideal.png" alt="Curcumin" class="bottle w-full h-full object-contain drop-shadow-2xl">
                     </div>
+                    <!-- Hover Text Details (Anchored to top so it grows downwards) -->
+                    <div class="absolute top-full mt-4 md:mt-6 left-0 w-full px-2 text-center opacity-0 transform translate-y-4 transition-all duration-700 ease-out group-hover:opacity-100 group-hover:translate-y-0 z-20 pointer-events-none">
+                        <h3 class="font-serif text-xl lg:text-2xl text-brand-text mb-1.5 transition-colors duration-700">Curcumin Extract</h3>
+                        <p class="font-sans text-[10px] lg:text-xs tracking-widest uppercase text-brand-muted transition-colors duration-700">Vitalitate de Aur. Trezește-ți energia interioară și găsește-ți liniștea.</p>
+                    </div>
                 </div>
             </div>
 
             <!-- Email Collection -->
             <div class="z-20 w-full max-w-md mt-4 flex flex-col items-center min-h-[180px]">
                 <div id="form-headers" class="text-center transition-opacity duration-500">
-                    <p class="text-sm text-brand-muted mb-2 font-sans tracking-wide transition-colors duration-700">Be the first to experience the drop.</p>
-                    <p class="text-[11px] text-brand-muted/70 mb-8 font-sans tracking-widest uppercase transition-colors duration-700">e.g., Jane Doe, jane@auraroots.com</p>
+                    <p class="text-sm text-brand-muted mb-2 font-sans tracking-wide transition-colors duration-700">Fii printre primii care descoperă lansarea.</p>
+                    <p class="text-[11px] text-brand-muted/70 mb-8 font-sans tracking-widest uppercase transition-colors duration-700">ex., Ioana Popa, ioana@gmail.com</p>
                 </div>
                 
                 <form id="waitlist-form" class="w-full flex flex-col relative group transition-opacity duration-300">
                     
                     <!-- STEP 1: Name & Email -->
                     <div id="step-1" class="w-full flex flex-col gap-4 transition-all duration-500 transform origin-top">
-                        <input type="text" id="name-input" required placeholder="Your Name" class="w-full bg-transparent border-b border-brand-border/30 py-3 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
+                        <input type="text" id="name-input" required placeholder="Numele tău" class="w-full bg-transparent border-b border-brand-border/30 py-3 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
                         
                         <div class="relative w-full group-focus-within:text-brand-text">
-                            <input type="email" id="email-input" required placeholder="Email Address" class="w-full bg-transparent border-b border-brand-border/30 py-3 pr-12 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
+                            <input type="email" id="email-input" required placeholder="Adresa de email" class="w-full bg-transparent border-b border-brand-border/30 py-3 pr-12 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
                             <!-- Z-index raised, type="button" strictly enforced -->
                             <button type="button" id="next-btn" class="absolute right-0 top-1/2 -translate-y-1/2 text-brand-text/50 hover:text-brand-text transition-colors duration-700 p-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed z-50">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -248,27 +252,27 @@
                     <!-- STEP 2: Survey -->
                     <div id="step-2" class="w-full flex flex-col gap-6 absolute top-0 left-0 opacity-0 pointer-events-none transition-all duration-500 transform translate-y-4">
                         <div class="flex flex-col gap-3">
-                            <label class="text-sm text-brand-text font-sans tracking-wide">Which product sparks your interest most?</label>
+                            <label class="text-sm text-brand-text font-sans tracking-wide">Ce produs te atrage cel mai mult?</label>
                             <div class="flex flex-wrap gap-2">
                                 <label class="radio-pill cursor-pointer"><input type="radio" name="product" value="Shilajit Resin" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Shilajit Resin</div></label>
                                 <label class="radio-pill cursor-pointer"><input type="radio" name="product" value="Ashwagandha Root" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Ashwagandha Root</div></label>
                                 <label class="radio-pill cursor-pointer"><input type="radio" name="product" value="Curcumin Extract" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Curcumin Extract</div></label>
-                                <label class="radio-pill cursor-pointer"><input type="radio" name="product" value="All of them" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">All of them</div></label>
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="product" value="Toate" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Toate</div></label>
                             </div>
                         </div>
 
                         <div class="flex flex-col gap-3">
-                            <label class="text-sm text-brand-text font-sans tracking-wide">What matters most to you in a supplement?</label>
+                            <label class="text-sm text-brand-text font-sans tracking-wide">Ce contează cel mai mult pentru tine la un supliment?</label>
                             <div class="flex flex-wrap gap-2">
-                                <label class="radio-pill cursor-pointer"><input type="radio" name="value" value="Uncompromising Purity" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Uncompromising Purity</div></label>
-                                <label class="radio-pill cursor-pointer"><input type="radio" name="value" value="Clinical Efficacy" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Clinical Efficacy</div></label>
-                                <label class="radio-pill cursor-pointer"><input type="radio" name="value" value="Fair Pricing" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Fair Pricing</div></label>
-                                <label class="radio-pill cursor-pointer"><input type="radio" name="value" value="Fast Delivery" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Fast Delivery</div></label>
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="value" value="Puritate" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Puritate</div></label>
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="value" value="Eficacitate" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Eficacitate</div></label>
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="value" value="Pret rezonabil" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Pret rezonabil</div></label>
+                                <label class="radio-pill cursor-pointer"><input type="radio" name="value" value="Livrare rapida" class="hidden"><div class="px-4 py-2 border border-brand-border/20 rounded-full text-xs font-sans text-brand-muted transition-all duration-300 hover:border-brand-border/50">Livrare rapida</div></label>
                             </div>
                         </div>
 
                         <button type="submit" id="submit-btn" class="w-full py-3 mt-2 bg-brand-text text-brand-bg rounded-lg font-sans tracking-wide transition-opacity hover:opacity-90 flex items-center justify-center gap-2">
-                            Join the Waitlist
+                            Intră pe lista de așteptare.
                         </button>
                     </div>
                 </form>
@@ -287,10 +291,10 @@
         <footer class="mt-auto border-t border-brand-border/10 py-8 px-6 md:px-12 w-full z-20 transition-colors duration-700">
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4 items-start text-xs text-brand-muted font-sans tracking-wide leading-relaxed">
                 <div class="md:col-span-1">
-                    <p>Sourcing the world’s most potent adaptogens. Formulated for the modern mind and body.</p>
+                    <p>Selecționăm cei mai puternici adaptogeni din lume. O formulă creată pentru mintea și corpul omului modern.</p>
                 </div>
                 <div class="md:col-span-1 md:text-center">
-                    <a href="mailto:hello@auraroots.com" class="hover:text-brand-text transition-colors underline decoration-transparent hover:decoration-brand-text underline-offset-4">hello@auraroots.com</a>
+                    <a href="mailto:hello@hara-shop.ro" class="hover:text-brand-text transition-colors underline decoration-transparent hover:decoration-brand-text underline-offset-4">hello@hara-shop.ro</a>
                 </div>
                 <div class="md:col-span-1 flex justify-start md:justify-center gap-6">
                     <!-- Instagram -->
@@ -304,11 +308,13 @@
                 </div>
                 <div class="md:col-span-1 md:text-right flex flex-col gap-2 items-start md:items-end">
                     <div class="flex gap-4">
-                        <a href="#" class="hover:text-brand-text transition-colors">Privacy</a>
-                        <a href="#" class="hover:text-brand-text transition-colors">Terms</a>
+                        <a href="#" class="hover:text-brand-text transition-colors">Politica de utilizare Cookie-uri</a>
+                        <a href="#" class="hover:text-brand-text transition-colors">Termeni si conditii</a>
+                        <a href="#" class="hover:text-brand-text transition-colors">Confidențialitate GDPR</a>
+                        <a href="#" class="hover:text-brand-text transition-colors">ANPC</a>
                     </div>
                     <p class="text-[10px] opacity-70 max-w-[200px] mt-2 leading-tight">
-                        *These statements have not been evaluated by the FDA.
+                        Copyright © 2026 HARA – Toate drepturile rezervate
                     </p>
                 </div>
             </div>
@@ -322,15 +328,7 @@
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- 1. Cloud Storage Init ---
-        const firebaseConfig = {
-          apiKey: "AIzaSyCU6i-IQsJdUKGqZcyZLoLMAel-_tLoaYA",
-          authDomain: "rasayanam-romania.firebaseapp.com",
-          projectId: "rasayanam-romania",
-          storageBucket: "rasayanam-romania.firebasestorage.app",
-          messagingSenderId: "706512837695",
-          appId: "1:706512837695:web:aea0884f124a833a842c8a",
-          measurementId: "G-JDCHWXVVHF"
-        };
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
@@ -378,35 +376,60 @@
         const emailInput = document.getElementById('email-input');
         const nextBtn = document.getElementById('next-btn');
         const submitBtn = document.getElementById('submit-btn');
+        const errorState = document.getElementById('error-state');
+
+        // Prevent Enter key from silently submitting the form on Step 1
+        nameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); nextBtn.click(); }
+        });
+        emailInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); nextBtn.click(); }
+        });
 
         // Handle Next Button (Move to Survey)
         nextBtn.addEventListener('click', () => {
-            if (nameInput.checkValidity() && emailInput.checkValidity()) {
-                // Hide Step 1 & Headers
-                formHeaders.style.opacity = '0';
-                step1.style.opacity = '0';
-                step1.style.transform = 'translateY(-10px)';
-                step1.style.pointerEvents = 'none';
+            errorState.classList.add('hidden'); // Clear errors
 
-                setTimeout(() => {
-                    formHeaders.style.display = 'none';
-                    step1.style.position = 'absolute';
-                    
-                    // Show Step 2
-                    step2.style.position = 'relative';
-                    step2.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-                    step2.classList.add('opacity-100', 'translate-y-0');
-                }, 500);
-            } else {
-                // Trigger native browser validation UI
-                form.reportValidity();
+            // Manual Validation check for foolproof UX
+            if (!nameInput.value.trim() || !emailInput.value.trim()) {
+                errorState.innerText = "Please fill in both your name and email address.";
+                errorState.classList.remove('hidden');
+                return;
             }
+            if (!emailInput.checkValidity()) {
+                errorState.innerText = "Please enter a valid email address.";
+                errorState.classList.remove('hidden');
+                return;
+            }
+
+            // Hide Step 1 & Headers
+            formHeaders.style.opacity = '0';
+            step1.style.opacity = '0';
+            step1.style.transform = 'translateY(-10px)';
+            step1.style.pointerEvents = 'none';
+
+            setTimeout(() => {
+                formHeaders.style.display = 'none';
+                step1.style.position = 'absolute';
+                
+                // Show Step 2
+                step2.style.position = 'relative';
+                step2.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                step2.classList.add('opacity-100', 'translate-y-0');
+            }, 500);
         });
         
         // Handle Final Submit
         form.addEventListener('submit', async (e) => {
             e.preventDefault(); 
-            if (!currentUser) return;
+            errorState.classList.add('hidden');
+
+            if (!currentUser) {
+                errorState.innerText = "Secure connection establishing... please try again in a moment.";
+                errorState.classList.remove('hidden');
+                return;
+            }
+
             const name = nameInput.value;
             const email = emailInput.value;
             
@@ -418,7 +441,7 @@
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = 'Saving...';
                 try {
-                    const waitlistRef = collection(db, 'waitlist');
+                    const waitlistRef = collection(db, 'artifacts', appId, 'public', 'data', 'waitlist');
                     await addDoc(waitlistRef, {
                         name: name,
                         email: email,
@@ -442,7 +465,8 @@
                     console.error("Save failed:", error);
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = 'Join the Waitlist';
-                    document.getElementById('error-state').classList.remove('hidden');
+                    errorState.innerText = "Something went wrong saving your entry. Please try again.";
+                    errorState.classList.remove('hidden');
                 }
             }
         });
