@@ -271,7 +271,15 @@
                             </div>
                         </div>
 
-                        <button type="submit" id="submit-btn" class="w-full py-3 mt-2 bg-brand-text text-brand-bg rounded-lg font-sans tracking-wide transition-opacity hover:opacity-90 flex items-center justify-center gap-2">
+                        <!-- Mandatory GDPR Checkbox -->
+                        <div class="flex items-start gap-2 mt-2">
+                            <input type="checkbox" id="gdpr-check" required class="mt-1 accent-brand-text cursor-pointer">
+                            <label for="gdpr-check" class="text-[10px] text-brand-muted font-sans leading-tight cursor-pointer">
+                                Sunt de acord cu prelucrarea datelor mele personale pentru a fi notificat(ă) la lansarea produselor, conform <a href="#" id="open-gdpr-form" class="underline hover:text-brand-text transition-colors">Politicii de Confidențialitate</a>.
+                            </label>
+                        </div>
+
+                        <button type="submit" id="submit-btn" class="w-full py-3 mt-1 bg-brand-text text-brand-bg rounded-lg font-sans tracking-wide transition-opacity hover:opacity-90 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
                             Intră pe lista de așteptare.
                         </button>
                     </div>
@@ -307,18 +315,98 @@
                     <a href="#" class="text-brand-muted hover:text-[#FF0000] transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
                 </div>
                 <div class="md:col-span-1 md:text-right flex flex-col gap-2 items-start md:items-end">
+                    <!-- Cleaned up footer links -->
                     <div class="flex gap-4">
-                        <a href="#" class="hover:text-brand-text transition-colors">Politica de utilizare Cookie-uri</a>
-                        <a href="#" class="hover:text-brand-text transition-colors">Termeni si conditii</a>
-                        <a href="#" class="hover:text-brand-text transition-colors">Confidențialitate GDPR</a>
-                        <a href="#" class="hover:text-brand-text transition-colors">ANPC</a>
+                        <a href="#" id="open-tc-footer" class="hover:text-brand-text transition-colors">Termeni și condiții</a>
+                        <a href="#" id="open-gdpr-footer" class="hover:text-brand-text transition-colors">Confidențialitate GDPR</a>
                     </div>
-                    <p class="text-[10px] opacity-70 max-w-[200px] mt-2 leading-tight">
+                </div>
+
+                <!-- Legal text and Copyright separated and centered -->
+                <div class="md:col-span-4 mt-6 md:mt-8 pt-8 border-t border-brand-border/10 flex flex-col items-center text-center transition-colors duration-700">
+                    <p class="text-[10px] md:text-xs opacity-70 max-w-2xl leading-relaxed text-brand-muted">
+                        *Aceste produse sunt suplimente alimentare și nu înlocuiesc o dietă variată și echilibrată. Nu au rolul de a diagnostica, trata sau vindeca afecțiuni.
+                    </p>
+                    <p class="text-[10px] opacity-50 mt-4 text-brand-muted">
                         Copyright © 2026 HARA – Toate drepturile rezervate
                     </p>
                 </div>
             </div>
         </footer>
+    </div>
+
+    <!-- Termeni și Condiții Modal (Hidden by default) -->
+    <div id="tc-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 md:p-0">
+        <!-- Blurred Backdrop -->
+        <div id="tc-backdrop" class="absolute inset-0 bg-black/30 backdrop-blur-sm cursor-pointer transition-opacity"></div>
+        
+        <!-- Modal Content Box -->
+        <div class="relative bg-brand-bg w-full max-w-2xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-brand-border/10 transform transition-all">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-5 border-b border-brand-border/10 bg-brand-bg z-10">
+                <h2 class="font-serif text-xl md:text-2xl text-brand-text">Termeni și Condiții</h2>
+                <button id="close-tc-btn" class="text-brand-muted hover:text-brand-text transition-colors p-2 cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            
+            <!-- Scrollable Text Body -->
+            <div class="p-6 overflow-y-auto font-sans text-xs md:text-sm text-brand-muted space-y-4 leading-relaxed">
+                <p><strong>1. Introducere</strong><br>
+                Acest site web este o platformă de pre-lansare. Prin accesarea și utilizarea acestui site, precum și prin înscrierea pe lista de așteptare, sunteți de acord cu acești Termeni și Condiții.</p>
+                
+                <p><strong>2. Scopul Campaniei</strong><br>
+                Această pagină are rol informativ și de testare a pieței. Produsele prezentate nu sunt încă disponibile pentru vânzare. Înscrierea pe lista de așteptare nu creează o obligație contractuală de a cumpăra și nici o garanție fermă că produsele vor fi lansate la data estimată.</p>
+                
+                <p><strong>3. Proprietate Intelectuală</strong><br>
+                Toate materialele de pe acest site (texte, imagini, elemente grafice, logo-uri) sunt proprietatea exclusivă a brandului HARA și sunt protejate de legile privind drepturile de autor. Orice copiere, reproducere sau utilizare neautorizată este strict interzisă.</p>
+                
+                <p><strong>4. Modificări ale Site-ului</strong><br>
+                Ne rezervăm dreptul de a modifica, suspenda sau întrerupe orice aspect al acestei pagini de pre-lansare în orice moment, fără o notificare prealabilă.</p>
+                
+                <p><strong>5. Limitarea Răspunderii</strong><br>
+                Informațiile prezentate pe acest site sunt oferite "ca atare". Nu ne asumăm nicio responsabilitate pentru eventualele erori, omisiuni sau pentru imposibilitatea temporară de accesare a site-ului.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- GDPR Modal (Hidden by default) -->
+    <div id="gdpr-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 md:p-0">
+        <!-- Blurred Backdrop -->
+        <div id="gdpr-backdrop" class="absolute inset-0 bg-black/30 backdrop-blur-sm cursor-pointer transition-opacity"></div>
+        
+        <!-- Modal Content Box -->
+        <div class="relative bg-brand-bg w-full max-w-2xl max-h-[85vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-brand-border/10 transform transition-all">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-5 border-b border-brand-border/10 bg-brand-bg z-10">
+                <h2 class="font-serif text-xl md:text-2xl text-brand-text">Politica de Confidențialitate (GDPR)</h2>
+                <button id="close-modal-btn" class="text-brand-muted hover:text-brand-text transition-colors p-2 cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            
+            <!-- Scrollable Text Body -->
+            <div class="p-6 overflow-y-auto font-sans text-xs md:text-sm text-brand-muted space-y-4 leading-relaxed">
+                <p><strong>1. Cine suntem</strong><br>
+                Acest site web reprezintă o campanie de pre-lansare (testare a pieței) pentru brandul HARA. În această etapă, datele sunt colectate și gestionate strict în scopul validării produselor și lansării viitoare.</p>
+                
+                <p><strong>2. Ce date colectăm</strong><br>
+                Când vă înscrieți pe lista de așteptare, colectăm adresa de e-mail, numele dumneavoastră și preferințele exprimate în cadrul mini-chestionarului (ex. produsul preferat, valorile căutate).</p>
+                
+                <p><strong>3. Scopul colectării</strong><br>
+                Datele sunt colectate EXCLUSIV pentru a vă contacta în momentul în care produsele devin disponibile pentru achiziție (lansare oficială) și pentru a înțelege preferințele generale ale clienților noștri.</p>
+                
+                <p><strong>4. Securitatea datelor</strong><br>
+                Datele dumneavoastră sunt stocate în siguranță pe serverele Google Firebase (Firestore), fiind protejate prin criptare la standarde industriale. Nu vindem, nu închiriem și nu transferăm aceste date către nicio terță parte în scopuri de marketing.</p>
+
+                <p><strong>5. Utilizarea Cookie-urilor</strong><br>
+                Acest site folosește unelte de analiză minimă (precum Google Analytics) pentru a măsura performanța campaniei noastre, care pot plasa cookie-uri anonime pe dispozitivul dumneavoastră. Continuând navigarea, sunteți de acord cu această practică.</p>
+                
+                <p><strong>6. Drepturile dumneavoastră (Conform GDPR)</strong><br>
+                Conform Regulamentului (UE) 2016/679 (GDPR), aveți dreptul de acces la date, dreptul la rectificare, dreptul la ștergere ("dreptul de a fi uitat") și dreptul de a vă retrage consimțământul în orice moment.<br><br>
+                Pentru a solicita ștergerea imediată a datelor din lista noastră de așteptare, vă rugăm să ne contactați la adresa: <a href="mailto:hello@hara-shop.ro" class="underline text-brand-text">hello@hara-shop.ro</a>.</p>
+            </div>
+        </div>
     </div>
 
     <!-- Firebase Logic -->
@@ -377,6 +465,40 @@
         const nextBtn = document.getElementById('next-btn');
         const submitBtn = document.getElementById('submit-btn');
         const errorState = document.getElementById('error-state');
+
+        // --- 5. GDPR Modal Logic ---
+        const gdprModal = document.getElementById('gdpr-modal');
+        const openGdprForm = document.getElementById('open-gdpr-form');
+        const openGdprFooter = document.getElementById('open-gdpr-footer');
+        const closeGdprBtn = document.getElementById('close-modal-btn');
+        const gdprBackdrop = document.getElementById('gdpr-backdrop');
+
+        // --- 6. T&C Modal Logic ---
+        const tcModal = document.getElementById('tc-modal');
+        const openTcFooter = document.getElementById('open-tc-footer');
+        const closeTcBtn = document.getElementById('close-tc-btn');
+        const tcBackdrop = document.getElementById('tc-backdrop');
+
+        // Generic open/close functions for both modals
+        const openModal = (modalElement) => {
+            modalElement.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevents scrolling the page while modal is open
+        };
+        const closeModal = (modalElement) => {
+            modalElement.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        };
+
+        // Attach events to GDPR Modal
+        openGdprForm.addEventListener('click', (e) => { e.preventDefault(); openModal(gdprModal); });
+        openGdprFooter.addEventListener('click', (e) => { e.preventDefault(); openModal(gdprModal); });
+        closeGdprBtn.addEventListener('click', () => closeModal(gdprModal));
+        gdprBackdrop.addEventListener('click', () => closeModal(gdprModal));
+
+        // Attach events to T&C Modal
+        openTcFooter.addEventListener('click', (e) => { e.preventDefault(); openModal(tcModal); });
+        closeTcBtn.addEventListener('click', () => closeModal(tcModal));
+        tcBackdrop.addEventListener('click', () => closeModal(tcModal));
 
         // Prevent Enter key from silently submitting the form on Step 1
         nameInput.addEventListener('keypress', (e) => {
