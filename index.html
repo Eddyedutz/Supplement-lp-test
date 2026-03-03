@@ -290,7 +290,7 @@
 
                 <div id="success-state" class="hidden w-full flex items-center justify-center gap-3 py-3 border-b border-green-600/30 text-green-600 transition-colors duration-700 mt-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                    <span class="font-sans text-lg tracking-wide">You're on the list.</span>
+                    <span class="font-sans text-lg tracking-wide">Acum ești pe listă!</span>
                 </div>
             </div>
         </main>
@@ -415,30 +415,64 @@
         import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- 1. Cloud Storage Init ---
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        // --- 1. LOGICA PENTRU FERESTRE POP-UP (Mutată sus pentru a funcționa mereu) ---
+        const gdprModal = document.getElementById('gdpr-modal');
+        const openGdprForm = document.getElementById('open-gdpr-form');
+        const openGdprFooter = document.getElementById('open-gdpr-footer');
+        const closeGdprBtn = document.getElementById('close-modal-btn');
+        const gdprBackdrop = document.getElementById('gdpr-backdrop');
+
+        const tcModal = document.getElementById('tc-modal');
+        const openTcFooter = document.getElementById('open-tc-footer');
+        const closeTcBtn = document.getElementById('close-tc-btn');
+        const tcBackdrop = document.getElementById('tc-backdrop');
+
+        const openModal = (modalElement) => {
+            modalElement.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; 
+        };
+        const closeModal = (modalElement) => {
+            modalElement.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        };
+
+        openGdprForm.addEventListener('click', (e) => { e.preventDefault(); openModal(gdprModal); });
+        openGdprFooter.addEventListener('click', (e) => { e.preventDefault(); openModal(gdprModal); });
+        closeGdprBtn.addEventListener('click', () => closeModal(gdprModal));
+        gdprBackdrop.addEventListener('click', () => closeModal(gdprModal));
+
+        openTcFooter.addEventListener('click', (e) => { e.preventDefault(); openModal(tcModal); });
+        closeTcBtn.addEventListener('click', () => closeModal(tcModal));
+        tcBackdrop.addEventListener('click', () => closeModal(tcModal));
+
+        // --- 2. CONFIGURAREA BAZEI DE DATE REALE ---
+        // Am înlocuit codul de test cu configurația ta reală din admin.html
+        const firebaseConfig = {
+            apiKey: "AIzaSyCU6i-IQsJdUKGqZcyZLoLMAel-_tLoaYA",
+            authDomain: "rasayanam-romania.firebaseapp.com",
+            projectId: "rasayanam-romania",
+            storageBucket: "rasayanam-romania.firebasestorage.app",
+            messagingSenderId: "706512837695",
+            appId: "1:706512837695:web:aea0884f124a833a842c8a",
+            measurementId: "G-JDCHWXVVHF"
+        };
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
         let currentUser = null;
 
-        // --- 2. Secure Auth ---
+        // --- 3. AUTENTIFICARE SECURIZATĂ ---
         const initAuth = async () => {
             try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-            } catch (error) { console.error("Auth failed:", error); }
+                await signInAnonymously(auth);
+            } catch (error) { console.error("Eroare autentificare:", error); }
         };
         initAuth();
 
         onAuthStateChanged(auth, (user) => { currentUser = user; });
 
-        // --- 3. Heatmap Tracking ---
+        // --- 4. HEATMAP TRACKING ---
         let hoverStats = { Shilajit: 0, Ashwagandha: 0, Curcumin: 0 };
         const products = document.querySelectorAll('[data-product]');
         let hoverTimers = {};
@@ -455,7 +489,7 @@
             });
         });
 
-        // --- 4. Form Submission & Flow ---
+        // --- 5. LOGICA PENTRU FORMULAR ---
         const formHeaders = document.getElementById('form-headers');
         const form = document.getElementById('waitlist-form');
         const step1 = document.getElementById('step-1');
@@ -466,41 +500,6 @@
         const submitBtn = document.getElementById('submit-btn');
         const errorState = document.getElementById('error-state');
 
-        // --- 5. GDPR Modal Logic ---
-        const gdprModal = document.getElementById('gdpr-modal');
-        const openGdprForm = document.getElementById('open-gdpr-form');
-        const openGdprFooter = document.getElementById('open-gdpr-footer');
-        const closeGdprBtn = document.getElementById('close-modal-btn');
-        const gdprBackdrop = document.getElementById('gdpr-backdrop');
-
-        // --- 6. T&C Modal Logic ---
-        const tcModal = document.getElementById('tc-modal');
-        const openTcFooter = document.getElementById('open-tc-footer');
-        const closeTcBtn = document.getElementById('close-tc-btn');
-        const tcBackdrop = document.getElementById('tc-backdrop');
-
-        // Generic open/close functions for both modals
-        const openModal = (modalElement) => {
-            modalElement.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Prevents scrolling the page while modal is open
-        };
-        const closeModal = (modalElement) => {
-            modalElement.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        };
-
-        // Attach events to GDPR Modal
-        openGdprForm.addEventListener('click', (e) => { e.preventDefault(); openModal(gdprModal); });
-        openGdprFooter.addEventListener('click', (e) => { e.preventDefault(); openModal(gdprModal); });
-        closeGdprBtn.addEventListener('click', () => closeModal(gdprModal));
-        gdprBackdrop.addEventListener('click', () => closeModal(gdprModal));
-
-        // Attach events to T&C Modal
-        openTcFooter.addEventListener('click', (e) => { e.preventDefault(); openModal(tcModal); });
-        closeTcBtn.addEventListener('click', () => closeModal(tcModal));
-        tcBackdrop.addEventListener('click', () => closeModal(tcModal));
-
-        // Prevent Enter key from silently submitting the form on Step 1
         nameInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') { e.preventDefault(); nextBtn.click(); }
         });
@@ -508,23 +507,20 @@
             if (e.key === 'Enter') { e.preventDefault(); nextBtn.click(); }
         });
 
-        // Handle Next Button (Move to Survey)
         nextBtn.addEventListener('click', () => {
-            errorState.classList.add('hidden'); // Clear errors
+            errorState.classList.add('hidden'); 
 
-            // Manual Validation check for foolproof UX
             if (!nameInput.value.trim() || !emailInput.value.trim()) {
-                errorState.innerText = "Please fill in both your name and email address.";
+                errorState.innerText = "Te rugăm să completezi numele și adresa de email.";
                 errorState.classList.remove('hidden');
                 return;
             }
             if (!emailInput.checkValidity()) {
-                errorState.innerText = "Please enter a valid email address.";
+                errorState.innerText = "Te rugăm să introduci o adresă de email validă.";
                 errorState.classList.remove('hidden');
                 return;
             }
 
-            // Hide Step 1 & Headers
             formHeaders.style.opacity = '0';
             step1.style.opacity = '0';
             step1.style.transform = 'translateY(-10px)';
@@ -534,36 +530,33 @@
                 formHeaders.style.display = 'none';
                 step1.style.position = 'absolute';
                 
-                // Show Step 2
                 step2.style.position = 'relative';
                 step2.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
                 step2.classList.add('opacity-100', 'translate-y-0');
             }, 500);
         });
         
-        // Handle Final Submit
         form.addEventListener('submit', async (e) => {
             e.preventDefault(); 
             errorState.classList.add('hidden');
 
             if (!currentUser) {
-                errorState.innerText = "Secure connection establishing... please try again in a moment.";
+                errorState.innerText = "Se stabilește o conexiune securizată... te rugăm să încerci din nou într-o secundă.";
                 errorState.classList.remove('hidden');
                 return;
             }
 
             const name = nameInput.value;
             const email = emailInput.value;
-            
-            // Gather survey data
-            const productInterest = document.querySelector('input[name="product"]:checked')?.value || 'Did not specify';
-            const valueInterest = document.querySelector('input[name="value"]:checked')?.value || 'Did not specify';
+            const productInterest = document.querySelector('input[name="product"]:checked')?.value || 'Nespecificat';
+            const valueInterest = document.querySelector('input[name="value"]:checked')?.value || 'Nespecificat';
             
             if(email && name) {
                 submitBtn.disabled = true;
-                submitBtn.innerHTML = 'Saving...';
+                submitBtn.innerHTML = 'Se salvează...';
                 try {
-                    const waitlistRef = collection(db, 'artifacts', appId, 'public', 'data', 'waitlist');
+                    // Salvare direct în colecția ta reală 'waitlist'
+                    const waitlistRef = collection(db, 'waitlist');
                     await addDoc(waitlistRef, {
                         name: name,
                         email: email,
@@ -584,10 +577,10 @@
                         });
                     }, 300);
                 } catch (error) {
-                    console.error("Save failed:", error);
+                    console.error("Eroare la salvare:", error);
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML = 'Join the Waitlist';
-                    errorState.innerText = "Something went wrong saving your entry. Please try again.";
+                    submitBtn.innerHTML = 'Intră pe lista de așteptare.';
+                    errorState.innerText = "Ceva nu a funcționat. Te rugăm să încerci din nou.";
                     errorState.classList.remove('hidden');
                 }
             }
