@@ -438,8 +438,10 @@
     <!-- Firebase & Functional Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        // 1. Am importat Google Analytics oficial
+        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
 
         // --- 1. MODAL LOGIC ---
         const gdprModal = document.getElementById('gdpr-modal');
@@ -481,9 +483,12 @@
             appId: "1:706512837695:web:aea0884f124a833a842c8a",
             measurementId: "G-JDCHWXVVHF"
         };
+        
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        // 2. Am initializat Google Analytics (va inregistra automat traficul pe pagina)
+        const analytics = getAnalytics(app);
 
         let currentUser = null;
 
@@ -578,6 +583,12 @@
                         userId: currentUser.uid,
                         timestamp: serverTimestamp(),
                         hoverEngagements: hoverStats
+                    });
+
+                    // 3. Trimitem conversia catre Google Analytics
+                    logEvent(analytics, 'generate_lead', {
+                        event_category: 'Waitlist',
+                        event_label: productInterest
                     });
 
                     form.style.opacity = '0';
