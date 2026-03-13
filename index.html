@@ -218,8 +218,8 @@
                     
                     <!-- STEP 1: Name & Email -->
                     <div id="step-1" class="w-full flex flex-col gap-4 transition-all duration-500 transform origin-top">
-                        <input type="text" id="name-input" required placeholder="Numele tău" class="w-full bg-transparent border-b border-brand-border/30 py-3 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
-                        <input type="email" id="email-input" required placeholder="Adresa de email" class="w-full bg-transparent border-b border-brand-border/30 py-3 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
+                        <input type="text" id="name-input" required placeholder="Numele tău" autocomplete="name" class="w-full bg-transparent border-b border-brand-border/30 py-3 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
+                        <input type="email" id="email-input" required placeholder="Adresa de email" autocomplete="email" class="w-full bg-transparent border-b border-brand-border/30 py-3 text-brand-text text-lg font-sans placeholder-brand-muted outline-none transition-colors duration-700 focus:border-brand-text disabled:opacity-50">
                         
                         <button type="button" id="next-btn" class="w-full py-3 mt-2 bg-brand-text text-[#F9F9F6] rounded-lg font-sans tracking-wide transition-opacity hover:opacity-90 flex items-center justify-center gap-2">
                             Continuă
