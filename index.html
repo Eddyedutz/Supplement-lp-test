@@ -197,7 +197,7 @@
 
 				<!-- Main tagline -->
 				<p class="font-sans text-xs md:text-sm tracking-[0.28em] uppercase text-brand-muted mb-3">
-					Înțelepciune ancestrală • claritate modernă
+					Energie. Focus. Echilibru.
 				</p>
 
 				<!-- Secondary statement -->
@@ -206,8 +206,8 @@
 					tradiție și formulări inspirate din Ayurveda.
 				</p>
 
-				<!-- Elegant interaction hint -->
-				<div class="mt-8 md:mt-10 flex items-center gap-2 text-[10px] md:text-xs uppercase tracking-[0.25em] text-brand-text/50">
+				<!-- Elegant interaction hint (Now clickable!) -->
+				<a href="#products-grid" class="mt-8 md:mt-10 flex items-center gap-2 text-[10px] md:text-xs uppercase tracking-[0.25em] text-brand-text/50 hover:text-brand-text/80 transition-colors duration-300 cursor-pointer">
 					<span>Apasă pe imagini și explorează colecția</span>
 					<svg xmlns="http://www.w3.org/2000/svg"
 						 width="14"
@@ -221,12 +221,13 @@
 						 class="animate-bounce">
 						<path d="M12 5v14M19 12l-7 7-7-7"/>
 					</svg>
-				</div>
+				</a>
 
 			</div>
 
 			<!-- PRODUCTS GRID -->
-			<div class="flex flex-col md:flex-row items-center justify-center gap-14 md:gap-10 lg:gap-16 w-full max-w-6xl z-20 mb-10 md:mb-12">
+            <!-- Added id="products-grid" and scroll-mt to handle smooth scrolling offset -->
+			<div id="products-grid" class="flex flex-col md:flex-row items-center justify-center gap-14 md:gap-10 lg:gap-16 w-full max-w-6xl z-20 mb-10 md:mb-12 scroll-mt-12 md:scroll-mt-24">
 
 			<div class="group group-ashwa flex flex-col items-center w-64 lg:w-80 cursor-pointer"
 				 data-product="Ashwagandha"
